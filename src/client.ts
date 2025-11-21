@@ -1,10 +1,9 @@
 // src/client.ts
 
-import { getHeartRate } from './sensors/motions';          // there’s no heartRate.ts, motions.ts covers it
-import { getMotion } from './sensors/motions';
+import { getHeartRate, getMotion } from './sensors/motions';
 import { getEnvironment } from './sensors/environmental';
 import { predictThreat } from './ai/predictor';
-import { triggerDefense } from './defense/reactivate';     // file is reactivate.ts, not reactive
+import { triggerDefense } from './defense/reactivate';
 import { simulateAirburst } from './defense/airburst';
 
 export async function simulateClientCycle() {
