@@ -1,12 +1,17 @@
-import { calculateInstinct } from "./instincts.js";
+// src/ai/predictor.ts
 
-export async function predictThreat(data: { heartRate: number; motion: number; environment: any }) {
-  const { heartRate, motion, environment } = data;
+import { instincts } from '../instincts';
 
-  // Simple predictive logic: higher heart rate + motion + environment noise increases threat
-  const instinctScore = calculateInstinct({ heartRate, motion, environment });
+interface SensorData {
+  heartRate: number;
+  motion: number;
+  environment: number;
+}
 
-  const threatLevel = instinctScore > 150 ? "HIGH" : instinctScore > 100 ? "MEDIUM" : "LOW";
-
-  return threatLevel;
+export async function predictThreat(data: SensorData): Promise<string> {
+  // Example: use instincts to calculate threat level
+  const threatScore = instincts.calculate(data.heartRate, data.motion, data.environment);
+  if (threatScore > 7) return 'High';
+  if (threatScore > 4) return 'Medium';
+  return 'Low';
 }
