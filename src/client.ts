@@ -1,9 +1,11 @@
-import { getHeartRate } from "../sensors/heartRate.js";
-import { getMotion } from "../sensors/motion.js";
-import { getEnvironment } from "../sensors/environmental.js";
-import { predictThreat } from "../ai/predictor.js";
-import { triggerDefense } from "../defense/reactive.js";
-import { simulateAirburst } from "../defense/airburst.js";
+// src/client.ts
+
+import { getHeartRate } from './sensors/heartRate';
+import { getMotion } from './sensors/motions';
+import { getEnvironment } from './sensors/environmental';
+import { predictThreat } from './ai/predictor';
+import { triggerDefense } from './defense/reactive';
+import { simulateAirburst } from './defense/airburst';
 
 export async function simulateClientCycle() {
   const heartRate = getHeartRate();
