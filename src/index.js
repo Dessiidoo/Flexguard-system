@@ -1,4 +1,5 @@
 // src/index.js
+app.use(express.static('frontend'));
 import express from 'express';
 import { predictThreat } from './ai/predictor.js';
 import { logger } from './utilities/logger.js';
