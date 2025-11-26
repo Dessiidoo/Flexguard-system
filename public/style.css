@@ -1,0 +1,42 @@
+body {
+  background: #0d0d0f;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 40px;
+}
+
+.container {
+  margin-top: 40px;
+}
+
+#orb {
+  width: 200px;
+  height: 200px;
+  margin: 40px auto;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #0ff, #006);
+  box-shadow: 0 0 20px #0ff, inset 0 0 30px #003;
+  transition: all 0.8s ease;
+}
+
+.status-critical {
+  background: radial-gradient(circle at 30% 30%, #ff2, #a00);
+  box-shadow: 0 0 40px #f00, inset 0 0 40px #600;
+}
+
+.status-elevated {
+  background: radial-gradient(circle at 30% 30%, #fc0, #840);
+  box-shadow: 0 0 30px #fc0, inset 0 0 30px #430;
+}
+
+.status-stable {
+  background: radial-gradient(circle at 30% 30%, #0ff, #006);
+  box-shadow: 0 0 20px #0ff, inset 0 0 30px #003;
+}
+
+#status, #score {
+  font-size: 20px;
+  margin-top: 10px;
+}
