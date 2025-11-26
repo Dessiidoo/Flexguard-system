@@ -2,11 +2,12 @@
 
 import { instincts } from '../instincts';
 
-interface SensorData {
-  heartRate: number;
-  motion: number;
-  environment: number;
-}
+/**
+ * @typedef {Object} SensorData
+ * @property {number} motion
+ * @property {number} audio
+ * @property {number} temperature
+ */
 
 export async function predictThreat(data: SensorData): Promise<string> {
   // Example: use instincts to calculate threat level
