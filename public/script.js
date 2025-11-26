@@ -41,7 +41,7 @@ async function update() {
   }
 }
 
-setInterval(update, 2500);
+setInterval(update, 1000);
 
 addLog("Flexion initialized...");
 addLog("Neural guard waking...");
