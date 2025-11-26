@@ -1,18 +1,29 @@
-// src/ai/predictor.ts
+// src/ai/predictor.js
 
-import { instincts } from '../instincts';
+// Simple stub types via comments instead of TS
+// SensorData = whatever JSON your sensors send
+// Insights = basic risk output
 
 /**
- * @typedef {Object} SensorData
- * @property {number} motion
- * @property {number} audio
- * @property {number} temperature
+ * Fake risk calculator for now.
+ * @param {Object} sensorData
+ * @returns {Promise<{ riskScore: number, status: string }>}
  */
+export async function predictThreat(sensorData = {}) {
+  // Very simple “brain” just to keep Render happy
+  const load = Number(sensorData.load ?? 0);
+  const stress = Number(sensorData.stress ?? 0);
+  const anomalies = Number(sensorData.anomalies ?? 0);
 
-export async function predictThreat(data: SensorData): Promise<string> {
-  // Example: use instincts to calculate threat level
-  const threatScore = instincts.calculate(data.heartRate, data.motion, data.environment);
-  if (threatScore > 7) return 'High';
-  if (threatScore > 4) return 'Medium';
-  return 'Low';
+  const rawScore = load * 0.4 + stress * 0.4 + anomalies * 0.2;
+  const riskScore = Math.max(0, Math.min(100, Math.round(rawScore)));
+
+  let status = 'stable';
+  if (riskScore > 80) status = 'critical';
+  else if (riskScore > 50) status = 'elevated';
+
+  return {
+    riskScore,
+    status
+  };
 }
