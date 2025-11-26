@@ -1,42 +1,36 @@
-// src/index.js
-app.use(express.static('frontend'));
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { predictThreat } from './ai/predictor.js';
-import { logger } from './utilities/logger.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());
 
-// Health check
-app.get('/', (_req, res) => {
-  res.send('FlexGuard 2.0 API is running');
+// Serve the UI from /public
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
+// Main UI page
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
-// Example prediction route
-app.post('/predict', async (req, res, next) => {
-  try {
-    const insights = await predictThreat(req.body);
-    res.json(insights);
-  } catch (err) {
-    next(err);
-  }
-});
+// API route for threat prediction
+app.get('/api/threat', async (_req, res) => {
+  const randomData = {
+    load: Math.random() * 100,
+    stress: Math.random() * 100,
+    anomalies: Math.random() * 100
+  };
 
-// Error handler
-app.use((err, _req, res, _next) => {
-  if (err instanceof Error) {
-    if (logger && typeof logger.error === 'function') {
-      logger.error(err.message);
-    } else {
-      console.error(err);
-    }
-    res.status(500).send(err.message);
-  } else {
-    res.status(500).send('Unknown error');
-  }
+  const result = await predictThreat(randomData);
+  res.json(result);
 });
 
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
