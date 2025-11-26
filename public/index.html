@@ -2,28 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>Flexion – Active Guard Node</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flexion</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="chaos-bg"></div>
+  <div id="bg"></div>
 
-  <h1 class="title glitch" data-text="FLEXION">FLEXION</h1>
+  <div class="layout">
+    <header class="header">
+      <div class="title-block">
+        <h1 class="title-glitch" data-text="FLEXION">FLEXION</h1>
+        <div class="subtitle">Autonomous Guard Node v2.0</div>
+      </div>
+      <div class="status-summary">
+        <div class="status-pill" id="topStatus">STATUS: BOOTING</div>
+      </div>
+    </header>
 
-  <div class="orb-container">
-    <div id="orb"></div>
+    <main class="main">
+      <!-- LEFT: Radar + Core -->
+      <section class="left-pane">
+        <div class="radar-wrapper">
+          <div class="radar" id="radar">
+            <div class="radar-grid"></div>
+            <div class="radar-sweep"></div>
+            <div class="core-socket">
+              <div class="core-orb" id="coreOrb"></div>
+              <div class="core-ring outer-ring"></div>
+              <div class="core-ring inner-ring"></div>
+            </div>
+          </div>
+        </div>
+        <div class="hint">Tap the core / radar to provoke a reaction.</div>
+      </section>
+
+      <!-- RIGHT: Metrics + Panels -->
+      <section class="right-pane">
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="label">THREAT LEVEL</div>
+            <div class="value" id="metricThreat">--</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">LOAD</div>
+            <div class="value" id="metricLoad">--%</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">STRESS</div>
+            <div class="value" id="metricStress">--%</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">ANOMALIES</div>
+            <div class="value" id="metricAnom">--</div>
+          </div>
+          <div class="metric-card clickable" id="diagPanelToggle">
+            <div class="label">NEURAL GUARD</div>
+            <div class="value" id="metricNeural">CALIBRATING</div>
+          </div>
+          <div class="metric-card clickable" id="systemPanelToggle">
+            <div class="label">SYSTEM LINK</div>
+            <div class="value" id="metricLink">ONLINE</div>
+          </div>
+        </div>
+
+        <div class="panel-row">
+          <div class="panel" id="diagPanel">
+            <div class="panel-title">DIAGNOSTIC SNAPSHOT</div>
+            <div class="panel-body" id="diagBody">
+              No snapshot yet.
+            </div>
+          </div>
+          <div class="panel" id="systemPanel">
+            <div class="panel-title">CONNECTION GRAPH</div>
+            <div class="panel-body connections">
+              <div class="node core-node">CORE</div>
+              <div class="node guard-node">GUARD</div>
+              <div class="node env-node">ENV</div>
+              <div class="node threat-node">THREAT</div>
+              <svg class="link-lines" viewBox="0 0 200 120">
+                <line x1="50" y1="60" x2="150" y2="40" />
+                <line x1="50" y1="60" x2="150" y2="80" />
+                <line x1="50" y1="60" x2="150" y2="10" />
+                <line x1="50" y1="60" x2="150" y2="110" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom log -->
+    <section class="log-section">
+      <div class="log-title">EVENT STREAM</div>
+      <div class="log-window" id="logWindow"></div>
+    </section>
   </div>
-
-  <div class="status-panel glitch-small">
-    <p>Status: <span id="statusText">loading...</span></p>
-    <p>Risk Score: <span id="riskText">--</span></p>
-  </div>
-
-  <div class="log-window" id="logWindow"></div>
-
-  <audio id="hum" src="https://cdn.pixabay.com/audio/2022/03/15/audio_b4fd9d395d.mp3" loop></audio>
-  <audio id="glitch" src="https://cdn.pixabay.com/audio/2021/09/13/audio_f676f9f1cc.mp3"></audio>
 
   <script src="script.js"></script>
 </body>
