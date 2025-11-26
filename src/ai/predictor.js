@@ -1,19 +1,7 @@
-// src/ai/predictor.js
-
-// Simple stub types via comments instead of TS
-// SensorData = whatever JSON your sensors send
-// Insights = basic risk output
-
-/**
- * Fake risk calculator for now.
- * @param {Object} sensorData
- * @returns {Promise<{ riskScore: number, status: string }>}
- */
-export async function predictThreat(sensorData = {}) {
-  // Very simple “brain” just to keep Render happy
-  const load = Number(sensorData.load ?? 0);
-  const stress = Number(sensorData.stress ?? 0);
-  const anomalies = Number(sensorData.anomalies ?? 0);
+export async function predictThreat() {
+  const load = Math.random() * 100;
+  const stress = Math.random() * 100;
+  const anomalies = Math.random() * 20;
 
   const rawScore = load * 0.4 + stress * 0.4 + anomalies * 0.2;
   const riskScore = Math.max(0, Math.min(100, Math.round(rawScore)));
@@ -24,6 +12,10 @@ export async function predictThreat(sensorData = {}) {
 
   return {
     riskScore,
-    status
+    status,
+    timestamp: new Date().toISOString(),
+    load: load.toFixed(1),
+    stress: stress.toFixed(1),
+    anomalies: anomalies.toFixed(1)
   };
 }
