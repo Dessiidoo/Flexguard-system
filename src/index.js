@@ -1,26 +1,19 @@
-// src/index.ts
-
-import express, { Request, Response, NextFunction } from 'express';
+import express from 'express';
 import bodyParser from 'body-parser';
-import { predictThreat } from './ai/predictor';
-import { logger } from './utilities/logger';
+import { predictThreat } from './ai/predictor.js';
+import { logger } from './utilities/logger.js';
 
 const app = express();
 app.use(bodyParser.json());
 
-// Example route
-app.get('/', (_req: Request, res: Response) => {
+app.get('/', (req, res) => {
   res.send('FlexGuard 2.0 API is running');
 });
 
 // Error handler
-app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
-  if (err instanceof Error) {
-    logger.error(err.message);
-    res.status(500).send(err.message);
-  } else {
-    res.status(500).send('Unknown error');
-  }
+app.use((err, req, res, next) => {
+  logger.error(err?.message || 'Unknown error');
+  res.status(500).send(err?.message || 'Unknown error');
 });
 
 const PORT = process.env.PORT || 3000;
